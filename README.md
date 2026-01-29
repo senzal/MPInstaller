@@ -52,6 +52,8 @@ A simple, automated installer for BlishHUD/TacO marker packs for Guild Wars 2. T
 
 ## For Marker Pack Creators (Distributing Your Pack)
 
+> **Note:** Throughout this guide, we use example names like "MyMarkerPack" and "SenzallMP001". These are **just examples** - use whatever name you want for your marker pack! The installer works with any zip file name.
+
 ### Quick Start
 
 1. **Download the installer files:**
@@ -60,8 +62,8 @@ A simple, automated installer for BlishHUD/TacO marker packs for Guild Wars 2. T
 
 2. **Create your distribution package:**
    ```
-   YourMarkerPack/
-   ├── YourMarkerPack.zip       (your marker pack)
+   YourOwnPackName/
+   ├── YourOwnPackName.zip      (your marker pack - use any name!)
    ├── INSTALL.bat              (one-click installer)
    ├── Install-MarkerPack.ps1   (PowerShell script)
    └── README.txt               (optional: your custom instructions)
@@ -139,43 +141,124 @@ MyMarkerPack-v1.0.zip
 
 This is what you share with users!
 
-### Handling Different Marker Pack Names
+### Using Your Own Marker Pack Name
+
+**IMPORTANT:** The installer works with **ANY** zip file name you want to use. The examples below (like "MyMarkerPack" and "SenzallMP001") are just examples. **Use whatever name you want for your marker pack!**
 
 The installer is **completely agnostic** to marker pack names. It will:
 - Find ANY `.zip` file in the same directory (auto-detect mode)
 - Or use a specific zip file if configured in `INSTALL.bat`
-- Work with any naming convention
+- Work with any naming convention you choose
 
-**Examples that all work:**
-- `MyMarkerPack.zip`
-- `CustomMarkers_v3.zip`
-- `gw2_markers_2024.zip`
-- `WorldBosses.zip`
+**All of these work (use your own name!):**
+- `YourPackName.zip` ← Use your own pack name here
+- `YourPackName_v1.0.zip` ← Add version numbers if you want
+- `anything-you-want.zip` ← Literally any name works
+- `MyMarkerPack.zip` ← Example only
+- `SenzallMP001.zip` ← Example only
+- `WorldBosses.zip` ← Example only
 
 #### Auto-Detect Mode (Default)
 
 Leave the installer as-is. It will automatically find and install the first `.zip` file in the folder.
 
-#### Specify Exact Zip File
+**No configuration needed!** Just include your zip file with the installer files.
+
+#### Specify Exact Zip File (Advanced)
 
 If you have multiple zip files or want to ensure a specific file is installed, edit `INSTALL.bat`:
 
-1. Open `INSTALL.bat` in a text editor
+1. Open `INSTALL.bat` in a text editor (Notepad, Notepad++, etc.)
 2. Find the line: `SET MARKER_PACK_NAME=`
-3. Change it to: `SET MARKER_PACK_NAME=YourPackName_v1.2.zip`
+3. Change it to specify your exact zip filename
 4. Save the file
 
-Now when users run `INSTALL.bat`, it will install exactly that zip file.
-
-**Example:**
+**Example for a pack named MyMarkerPack_v1.2.zip:**
 ```bat
 SET MARKER_PACK_NAME=MyMarkerPack_v1.2.zip
 ```
+
+**Example for a pack named SenzallMP001.zip:**
+```bat
+SET MARKER_PACK_NAME=SenzallMP001.zip
+```
+
+Now when users run `INSTALL.bat`, it will install exactly that zip file.
 
 This is useful for:
 - Including multiple versions in your distribution
 - Having a specific naming convention
 - Providing different marker packs in one download
+
+---
+
+### Complete Example: Distributing "SenzallMP001" Marker Pack
+
+Let's walk through creating a distribution for a marker pack called **SenzallMP001**.
+
+#### Your Files:
+- `SenzallMP001.zip` - Your marker pack containing the marker XML files
+
+#### Steps:
+
+**1. Download installer files from this repository:**
+   - `INSTALL.bat`
+   - `Install-MarkerPack.ps1`
+
+**2. Create your distribution folder:**
+```
+SenzallMP001-Distribution/
+├── SenzallMP001.zip          (your marker pack)
+├── INSTALL.bat               (downloaded from repo)
+├── Install-MarkerPack.ps1    (downloaded from repo)
+└── README.txt                (optional: your custom instructions)
+```
+
+**3. Option A - Use Auto-Detect (Recommended):**
+
+Leave `INSTALL.bat` as-is. Since `SenzallMP001.zip` is the only zip file, it will be installed automatically.
+
+**4. Option B - Specify Exact File:**
+
+Edit `INSTALL.bat` and change:
+```bat
+SET MARKER_PACK_NAME=
+```
+to:
+```bat
+SET MARKER_PACK_NAME=SenzallMP001.zip
+```
+
+**5. (Optional) Create a custom README.txt:**
+```txt
+========================================
+SenzallMP001 - BlishHUD Marker Pack
+========================================
+
+INSTALLATION:
+1. Double-click INSTALL.bat
+2. Follow the instructions
+3. Done!
+
+INCLUDED MARKERS:
+- World Bosses
+- Hero Points
+- Map Completion Routes
+
+========================================
+```
+
+**6. Zip the entire distribution folder:**
+
+Create: `SenzallMP001-Distribution.zip`
+
+**7. Share this zip file with users!**
+
+Users will:
+1. Download `SenzallMP001-Distribution.zip`
+2. Extract all files
+3. Double-click `INSTALL.bat`
+4. Done! Markers installed automatically.
 
 ### Testing Your Distribution
 
