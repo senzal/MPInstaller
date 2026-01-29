@@ -1,0 +1,11 @@
+# Ignore marker pack zip files
+*.zip
+
+# Ignore test/temp folders
+test/
+temp/
+extracted/
+
+# Windows
+Thumbs.db
+desktop.ini
